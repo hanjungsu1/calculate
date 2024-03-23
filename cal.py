@@ -17,12 +17,18 @@ def calculate():
 def clear_entry():
     entry.delete(0, tk.END)
 
+# 오류 메시지를 지우는 함수
+def clear_error(event):
+    if "오류:" in entry.get():
+        entry.delete(0, tk.END)
+
 # UI 설정
 root = tk.Tk()
 root.title("계산기")
 
-entry = tk.Entry(root, width=40, borderwidth=5)
+entry = tk.Entry(root, width=40, borderwidth=5) # entry : 계산 입력칸
 entry.grid(row=0, column=0, columnspan=5, padx=10, pady=10)
+entry.bind("<Key>", clear_error) # 키보드 입력 이벤트 바인딩
 
 # 숫자 버튼
 buttons = [
