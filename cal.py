@@ -22,14 +22,15 @@ root = tk.Tk()
 root.title("계산기")
 
 entry = tk.Entry(root, width=40, borderwidth=5)
-entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
+entry.grid(row=0, column=0, columnspan=5, padx=10, pady=10)
 
 # 숫자 버튼
 buttons = [
     '7', '8', '9', '/',
     '4', '5', '6', '*',
     '1', '2', '3', '-',
-    '√', '0', '.', '+'
+    '√', '0', '.', '+',
+    'C', '(', ')', '='
 ]
 
 row_val = 1
