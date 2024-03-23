@@ -1,13 +1,17 @@
 import tkinter as tk
+import math
 
 # 계산 로직
 def calculate():
     try:
-        result = eval(entry.get())
+        # 사용자가 '√' 기호를 사용할 수 있도록 변환
+        expression = entry.get().replace('√', 'math.sqrt')
+        result = eval(expression, {'__builtins__': None}, math.__dict__)
         entry.delete(0, tk.END)
         entry.insert(tk.END, str(result))
-    except:
-        clear_entry()
+    except Exception as e:
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, f"오류: {e}")
 
 # 입력 필드 초기화
 def clear_entry():
@@ -25,7 +29,7 @@ buttons = [
     '7', '8', '9', '/',
     '4', '5', '6', '*',
     '1', '2', '3', '-',
-    '^', '0', '.', '+'
+    '√', '0', '.', '+'
 ]
 
 row_val = 1
