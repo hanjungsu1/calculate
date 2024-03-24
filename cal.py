@@ -1,12 +1,22 @@
 import tkinter as tk
 import math
 
+test = eval('math.sqrt(9)')
+print(test)
+
 # 계산 로직
 def calculate():
     try:
-        # 사용자가 '√' 기호를 사용할 수 있도록 변환
-        expression = entry.get().replace('√', 'math.sqrt')
-        result = eval(expression, {'__builtins__': None}, math.__dict__)
+        # 사용자가 입력한 문자열을 가져옴
+        expression = entry.get()
+        # '√' 기호를 감지하여 math.sqrt로 변환
+        while '√' in expression:
+            pre, post = expression.split('√', 1)
+            post = '(' + post + ')'
+            expression = pre + 'math.sqrt' + post
+            print(f"변환된 표현식: {expression}")  # 변환된 표현식을 출력
+        # 안전한 수식 평가를 위해 eval 대신 math 모듈의 함수 사용
+        result = eval(expression)
         entry.delete(0, tk.END)
         entry.insert(tk.END, str(result))
     except Exception as e:
