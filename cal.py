@@ -1,9 +1,6 @@
 import tkinter as tk
 import math
 
-test = eval('math.sqrt(9)')
-print(test)
-
 # 계산 로직
 def calculate():
     try:
@@ -36,7 +33,7 @@ def clear_error(event):
 root = tk.Tk()
 root.title("계산기")
 
-entry = tk.Entry(root, width=40, borderwidth=5) # entry : 계산 입력칸
+entry = tk.Entry(root, font= 24, width=40, borderwidth=7) # entry : 계산 입력칸
 entry.grid(row=0, column=0, columnspan=5, padx=10, pady=10)
 entry.bind("<Key>", clear_error) # 키보드 입력 이벤트 바인딩
 
