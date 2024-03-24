@@ -24,18 +24,18 @@ def calculate():
 def clear_entry():
     entry.delete(0, tk.END)
 
-# 오류 메시지를 지우는 함수
-def clear_error(event):
-    if "오류:" in entry.get():
-        entry.delete(0, tk.END)
+def validate_input(event):
+    valid_characters = "0123456789+-*/().√"
+    if event.char not in valid_characters:
+        return "break"  # 이벤트 처리 중단
 
 # UI 설정
 root = tk.Tk()
 root.title("계산기")
 
-entry = tk.Entry(root, font= 24, width=40, borderwidth=7) # entry : 계산 입력칸
+entry = tk.Entry(root, font= 24, width=40, borderwidth=10) # entry : 계산 입력칸
 entry.grid(row=0, column=0, columnspan=5, padx=10, pady=10)
-entry.bind("<Key>", clear_error) # 키보드 입력 이벤트 바인딩
+entry.bind("<Key>", validate_input) # 키보드 입력 이벤트 바인딩
 
 # 숫자 버튼
 buttons = [
@@ -55,18 +55,18 @@ for button in buttons:
             calculate()
         else:
             entry.insert(tk.END, x)
-    tk.Button(root, text=button, width=9, height=3, command=cmd).grid(row=row_val, column=col_val)
+    tk.Button(root, text=button, font=('돋움', 13), width=9, height=3, command=cmd).grid(row=row_val, column=col_val)
     col_val += 1
     if col_val > 3:
         col_val = 0
         row_val += 1
 
 # '=' 버튼
-equal_button = tk.Button(root, text='=', width=9, height=3, command=calculate)
+equal_button = tk.Button(root, text='=', font=13, width=9, height=3, command=calculate)
 equal_button.grid(row=5, column=3)
 
 # 'C' 버튼 (초기화 버튼)
-clear_button = tk.Button(root, text='C', width=9, height=3, command=clear_entry)
+clear_button = tk.Button(root, text='C', font=13, width=9, height=3, command=clear_entry)
 clear_button.grid(row=5, column=0)
 
 root.mainloop()
